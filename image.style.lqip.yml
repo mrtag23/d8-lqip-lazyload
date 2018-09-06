@@ -1,0 +1,15 @@
+uuid: 0c062d9d-7b3e-4eee-a635-bf2ef1a458d9
+langcode: en
+status: true
+dependencies: {  }
+name: lqip
+label: LQIP
+effects:
+  8f734683-8ebe-49a6-a1f7-f30a9fa60da5:
+    uuid: 8f734683-8ebe-49a6-a1f7-f30a9fa60da5
+    id: image_scale
+    weight: 1
+    data:
+      width: 15
+      height: null
+      upscale: false

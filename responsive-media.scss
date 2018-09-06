@@ -1,0 +1,73 @@
+// Use this for creating scalable elements (usually images / background images) that maintain a ratio.
+// USAGE: @include responsive-ratio(16,9);
+@mixin responsive-ratio($x,$y) {
+  height: 0;
+  padding-bottom: percentage($y / $x);
+}
+
+/* Responsive media styles. */
+.responsive-media {
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  background: transparent;
+  z-index: 1;
+
+  img,
+  picture,
+  iframe,
+  embed,
+  object,
+  video {
+    @extend %img-fit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}
+.responsive-media__lqip {
+  filter: blur(4rem);
+  transform: scale(1.04);
+  z-index: 1;
+}
+/*
+ Aspect ratio modifier
+ - since all images will now be positioned absolute we need to somehow define
+   initial image sizes so the page doesn't jump when the image is loaded.
+   We use padding approach for that purpose.
+ - all existent responsive image styles should be listed
+   in here to have an accurate sized placeholder.
+*/
+.responsive-media--header-text-block-image,
+.responsive-media--gallery-image {
+  @include responsive-ratio(16, 9);
+}
+.responsive-media--wide,
+.responsive-media--narrow {
+  @include responsive-ratio(1, 1);
+}
+.responsive-media--card,
+.responsive-media--teaser,
+.responsive-media--text-block-image {
+  @include responsive-ratio(3, 2);
+}
+.responsive-media--banner {
+  @include responsive-ratio(2, 1);
+  @include mappy-bp(xlarge) {
+    @include responsive-ratio(16, 9);
+  }
+}
+.responsive-media--half-banner-image-short {
+  @include responsive-ratio(16, 9);
+  @include mappy-bp(xsmall) {
+    @include responsive-ratio(9, 5);
+  }
+}
+.responsive-media--text-block-image-full {
+  @include responsive-ratio(2, 1);
+  @include mappy-bp(small) {
+    @include responsive-ratio(3, 1);
+  }
+}

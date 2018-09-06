@@ -1,0 +1,10 @@
+/* Some lazysizes CSS transitions to make everything look nice. */
+.lazyloading,
+.lazyload {
+  opacity: 0;
+}
+
+.lazyloaded {
+  opacity: 1;
+  transition: opacity 500ms;
+}

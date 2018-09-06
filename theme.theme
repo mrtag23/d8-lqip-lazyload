@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements template_preprocess_responsive_image().
+ */
+function theme_preprocess_responsive_image(&$variables) {
+  // Generate a LQIP image.
+  $image_style = \Drupal::entityTypeManager()->getStorage('image_style')->load('lqip');
+  $variables['lqip'] = $image_style->buildUrl($variables['uri']);
+
+  // Integrate lazy loading for all responsive image entities.
+  // Replace src with data-src attribute.
+  $variables['img_element']['#attributes']['data-src'] = $variables['img_element']['#uri'];
+  $variables['img_element']['#attributes']['class'] = 'lazyload';
+  unset($variables['img_element']['#uri']);
+
+  // Also replace srcset with data-srcset attributes.
+  foreach ($variables['sources'] as $source) {
+    $storage = $source->storage();
+    $srcset_value = $storage['srcset']->value();
+    $source->removeAttribute('srcset');
+    $source->setAttribute('data-srcset', $srcset_value);
+  }
+
+  // Call lazysizes library.
+  $variables['#attached']['library'][] = 'tianjin/lazysizes';
+}
