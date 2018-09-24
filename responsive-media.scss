@@ -5,6 +5,14 @@
   padding-bottom: percentage($y / $x);
 }
 
+// Simulates background-size: cover property for inline images.
+%img-fit {
+  object-fit: cover;
+  object-position: 50% 50%;
+  width: 100%;
+  height: 100%;
+}
+
 /* Responsive media styles. */
 .responsive-media {
   display: block;
